@@ -1,16 +1,14 @@
 import timeline_gen as tg
 import argparse
+import json
 import file_changes.file_changes as fc
 
-CONFIG_FILE = 'modules.conf'
+CONFIG_FILE = 'modules.json'
 config = {}
 
 def parse_config():
-    f = open(CONFIG_FILE).readlines()
-    for opt in f:
-        opt = opt.split('=')
-        if 'YES' in opt[1]:
-            config[opt[0]] = 1
+    global config
+    config = json.loads(open(CONFIG_FILE).read().strip())
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-y', '--yeet', help='Get yeet')
