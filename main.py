@@ -18,10 +18,12 @@ args = parser.parse_args()
 def main():
     parse_config()
     print(config)
-    if 'file_changes' in config:
-        fc.yeet()
     if 'rootkit_detection' in config:
+        print("\nStarting Rootkit Detection:")
         td.yeet()
+    if 'file_changes' in config:
+        print("\nLooking For File Changes:")
+        fc.yeet()
     print(args.yeet)
 
 if __name__ == '__main__':
