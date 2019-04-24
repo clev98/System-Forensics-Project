@@ -23,7 +23,7 @@ def log_and_restore(bpath, opath, text):
     # log incident details to csv for graph
     with open('graph.csv', 'a', newline='') as graph_file:
         filewriter = csv.writer(graph_file, delimiter=',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
-        filewriter.writerow([localtime, formatted_text, 'MEDIUM'])
+        filewriter.writerow([localtime, opath, formatted_text, 'MEDIUM'])
     graph_file.close()
 
     # report to console
