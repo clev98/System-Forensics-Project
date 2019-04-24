@@ -27,7 +27,7 @@ def CheckSysFS():
         except:
             continue
 
-if __name__ == "__main__":
+def yeet():
     sysLogPath = "/var/log/syslog.1"
     kernLogPath = "/var/log/kern.log"
     dmesgPath = "/var/log/dmesg"
