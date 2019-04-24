@@ -16,18 +16,18 @@ def backup_files(directory, watchfile):
     openfile.close()
 
 def log_and_restore(bpath, opath, text):
-    #TODO - sometimes this gets extra commas which messes with the columns. Filter inline commas.
     # get incident details
     localtime = time.asctime(time.localtime(time.time()))
+    formatted_text = text.replace(",", "")
 
     # log incident details to csv for graph
     with open('graph.csv', 'a', newline='') as graph_file:
         filewriter = csv.writer(graph_file, delimiter=',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
-        filewriter.writerow([localtime, text, 'MEDIUM'])
+        filewriter.writerow([localtime, formatted_text, 'MEDIUM'])
     graph_file.close()
 
     # report to console
-    print(localtime, "::", opath, "::", text, "::", "MEDIUM")
+    print(localtime, "::", opath, "::", formatted_text, "::", "MEDIUM")
 
     # restore
     cp(bpath, opath)
@@ -78,7 +78,6 @@ def yeet():
     with open('graph.csv', 'w+', newline='') as graph_file:
         filewriter = csv.writer(graph_file, delimiter=',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
         filewriter.writerow(['time', 'data changed', 'severity'])
-        filewriter.writerow(['time1', 'data changed1', 'severity1'])
     graph_file.close()
 
     backup_files(directory, watchfile)

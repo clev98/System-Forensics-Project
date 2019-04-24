@@ -1,2 +1,4 @@
 time,data changed,severity
 time1,data changed1,severity1
+Wed Apr 24 13:08:05 2019,- # To enable the settings / commands in this file for login shells as well,MEDIUM
+Wed Apr 24 13:08:05 2019,+ # o enable the settings / commands in this file for login shells as well,MEDIUM
