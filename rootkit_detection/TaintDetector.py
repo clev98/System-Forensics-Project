@@ -14,7 +14,7 @@ def ReadLogFile(log):
 
 # Iterate the sysfs for taint by checking taint files
 def CheckSysFS():
-    sysModules = os.listdir("/sys/modules")
+    sysModules = os.listdir("/sys/module")
 
     print("Checking SysFS:")
 
