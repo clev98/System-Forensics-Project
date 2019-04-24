@@ -2,7 +2,7 @@ import timeline_gen as tg
 import argparse
 import json
 import file_changes.file_changes as fc
-import root_kitdetection.TaintDetector as td
+import rootkit_detection.TaintDetector as td
 
 CONFIG_FILE = 'modules.json'
 config = {}
