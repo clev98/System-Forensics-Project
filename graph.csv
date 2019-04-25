@@ -1,1 +1,6 @@
-time,data changed,severity
+time,path,data changed,severity
+Wed Apr 24 20:57:02 2019,/etc/ssh/sshd_config,- ,MEDIUM
+Wed Apr 24 20:57:02 2019,/etc/ssh/sshd_config,+ root yes,HIGH
+Wed Apr 24 20:57:37 2019,/etc/bash.bashrc,- fi,MEDIUM
+Wed Apr 24 20:57:57 2019,/etc/passwd,- sshd:x:122:65534::/run/sshd:/usr/sbin/nologin,MEDIUM
+Wed Apr 24 20:57:57 2019,/etc/passwd,+ sshd:x:122:65534::/run/sshd:/bin/bash,MEDIUM

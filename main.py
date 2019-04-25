@@ -12,7 +12,6 @@ def parse_config():
     config = json.loads(open(CONFIG_FILE).read().strip())
 
 parser = argparse.ArgumentParser()
-parser.add_argument('-y', '--yeet', help='Get yeet')
 args = parser.parse_args()
 
 def main():
@@ -24,7 +23,9 @@ def main():
     if 'file_changes' in config:
         print("\nLooking For File Changes:")
         fc.main()
-    print(args.yeet)
+        if 'timeline_gen' in config:
+            print("\nCreating Timeline:")
+            tg.main()
 
 if __name__ == '__main__':
     main()

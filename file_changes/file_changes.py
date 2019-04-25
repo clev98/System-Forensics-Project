@@ -17,7 +17,7 @@ def backup_files(directory, watchfile):
 
 def get_severity(text):
     # find changes involving the word "root"
-    root = text.find("root")
+    root = text.lower().find("root")
     if root != -1:
         return "HIGH"
     else:
@@ -97,7 +97,7 @@ def main():
     # create the csv for graphing
     with open('graph.csv', 'w+', newline='') as graph_file:
         filewriter = csv.writer(graph_file, delimiter=',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
-        filewriter.writerow(['time', 'data changed', 'severity'])
+        filewriter.writerow(['time', 'path', 'data changed', 'severity'])
     graph_file.close()
 
     backup_files(directory, watchfile)
