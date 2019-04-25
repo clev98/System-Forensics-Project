@@ -15,19 +15,28 @@ def backup_files(directory, watchfile):
         cp(file, directory)
     openfile.close()
 
+def get_severity(text):
+    # find changes involving the word "root"
+    root = text.find("root")
+    if root != -1:
+        return "HIGH"
+    else:
+        return "MEDIUM"
+
 def log_and_restore(bpath, opath, text):
     # get incident details
     localtime = time.asctime(time.localtime(time.time()))
     formatted_text = text.replace(",", "")
+    severity = get_severity(text)
 
     # log incident details to csv for graph
     with open('graph.csv', 'a', newline='') as graph_file:
         filewriter = csv.writer(graph_file, delimiter=',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
-        filewriter.writerow([localtime, opath, formatted_text, 'MEDIUM'])
+        filewriter.writerow([localtime, opath, formatted_text, severity])
     graph_file.close()
 
     # report to console
-    print(localtime, "::", opath, "::", formatted_text, "::", "MEDIUM")
+    print(localtime, "::", opath, "::", formatted_text, "::", severity)
 
     # restore
     cp(bpath, opath)
@@ -40,7 +49,7 @@ def find_differences(directory, watchfile):
 
     # loop and check for changes until exit
     try:
-        print("Now actively monitoring files for changes... press Ctrl+C to yeet.")
+        print("Now actively monitoring files for changes... press Ctrl+C to exit.")
         while 1:
             time.sleep(5)   # change check interval
             for file in files:
@@ -66,12 +75,23 @@ def find_differences(directory, watchfile):
 
     # ctrl+c to exit
     except KeyboardInterrupt:
-        print("Yeeting...")
+        print("Exiting...")
         pass
 
-def yeet():
-    # the file paths
-    directory = r"./backup"
+def main():
+
+    # get the path of the backup directory and check if it exists
+    directory = input("Backup directory location [" + os.getcwd() + "/backup]: ")
+    if directory == "":
+        directory = r"./backup"
+    if os.path.isdir(os.getcwd() + "/backup") is True:
+        overwrite = input("Directory already exists. Overwrite? [n]: ")
+        if overwrite.lower() == "y" or "yes":
+            os.system("rm -rf " + os.getcwd() + "/backup")
+        else:
+            directory = directory + "1"
+
+    # get the path of the watchfile
     watchfile = "file_changes/watchfiles.txt"
 
     # create the csv for graphing
@@ -83,6 +103,4 @@ def yeet():
     backup_files(directory, watchfile)
     find_differences(directory, watchfile)
 
-    #TODO - check special cases like PermitRootLogin severity HIGH
-
-    print('Files are yeeted')
+    print('File changes successfully written to log.')

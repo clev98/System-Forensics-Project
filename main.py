@@ -20,10 +20,10 @@ def main():
     print(config)
     if 'rootkit_detection' in config:
         print("\nStarting Rootkit Detection:")
-        td.yeet()
+        td.main()
     if 'file_changes' in config:
         print("\nLooking For File Changes:")
-        fc.yeet()
+        fc.main()
     print(args.yeet)
 
 if __name__ == '__main__':
